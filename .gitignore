@@ -4,7 +4,17 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
+# Виртуальное окружение
+venv/
+venv311/
 env/
+ENV/
+
+# Переменные окружения
+.env
+
+# Сборка и дистрибуция
 build/
 develop-eggs/
 dist/
@@ -21,18 +31,29 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
-venv/
-venv311/
-ENV/
+# Тестирование и покрытие кода
+.pytest_cache/
+.coverage
+htmlcov/
 
-# IDE
+# Логи
+*.log
+
+# База данных SQLite
+*.db
+*.sqlite3
+
+# Файлы IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Project specific
-*.db
-.env
+# Файлы векторной базы данных
+data/chroma/
+
+# Временные файлы
+*.tmp
+
+# Системные файлы
 .DS_Store
