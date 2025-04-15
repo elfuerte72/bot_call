@@ -30,12 +30,30 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-async def get_session() -> AsyncSession:
+
+
+class AsyncSessionContextManager:
     """
-    Создает и возвращает сессию базы данных
-    
+    Класс контекстного менеджера для асинхронной сессии базы данных
+    """
+
+    def __init__(self):
+        self.session = None
+
+    async def __aenter__(self) -> AsyncSession:
+        self.session = async_session()
+        return self.session
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        if self.session:
+            await self.session.close()
+
+
+def get_session():
+    """
+    Создает и возвращает контекстный менеджер для сессии базы данных
+
     Returns:
-        AsyncSession: объект сессии
+        AsyncSessionContextManager: контекстный менеджер для сессии
     """
-    async with async_session() as session:
-        yield session
+    return AsyncSessionContextManager()

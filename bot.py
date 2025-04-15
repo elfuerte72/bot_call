@@ -3,6 +3,8 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from config.config import load_config
+from database.base import init_db
+from handlers import register_all_handlers
 
 # Настройка логирования
 logging.basicConfig(
@@ -23,9 +25,13 @@ async def main():
     storage = MemoryStorage()
     dp = Dispatcher(storage=storage)
     
-    # Регистрация роутеров (будет добавлено позже)
-    # from handlers import register_all_handlers
-    # register_all_handlers(dp)
+    # Инициализация базы данных
+    await init_db()
+    logger.info("База данных инициализирована")
+    
+    # Регистрация роутеров
+    register_all_handlers(dp)
+    logger.info("Обработчики зарегистрированы")
     
     # Пропуск накопившихся апдейтов
     await bot.delete_webhook(drop_pending_updates=True)
