@@ -1,0 +1,32 @@
+# Виртуальное окружение
+venv/
+env/
+.env
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Логи
+*.log
+
+# База данных SQLite
+*.db
+*.sqlite3
+
+# Файлы IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Файлы векторной базы данных
+data/chroma/
+
+# Временные файлы
+*.tmp
+.DS_Store
