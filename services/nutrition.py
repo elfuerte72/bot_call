@@ -162,7 +162,7 @@ def calculate_macros(
     age: int,
     height: float,
     weight: float,
-    activity_factor: float,
+    activity_factor: str | float,
     goal: str
 ) -> Dict[str, float]:
     """
@@ -184,11 +184,19 @@ def calculate_macros(
         - carbs: Углеводы в граммах
     """
     # Преобразуем текстовые значения пола и цели в формат для калькулятора
-    gender_normalized = "мужской" if gender == "Мужской" else "женский"
+    gender_normalized: Literal["мужской", "женский"] = "мужской" if gender == "Мужской" else "женский"
     
     # Определяем ключ цели для расчета
     goal_key = GOAL_MAPPING.get(goal, "maintenance")
     
+    # Преобразуем activity_factor в float, если это строка
+    if isinstance(activity_factor, str):
+        try:
+            activity_factor = float(activity_factor)
+        except ValueError:
+            # Если невозможно преобразовать в float, используем значение по умолчанию
+            activity_factor = 1.55  # Значение по умолчанию (средняя активность)
+            
     # Ищем ближайший уровень активности по коэффициенту
     activity_key = "medium"  # Значение по умолчанию
     min_diff = float('inf')
