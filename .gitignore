@@ -1,13 +1,20 @@
 # Виртуальное окружение
 venv/
+venv311/
 env/
+ENV/
+
 # Переменные окружения
 .env
 
-# Кэш Python
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+
+# Кэш Python
 .pytest_cache/
 .coverage
 htmlcov/
@@ -19,15 +26,38 @@ htmlcov/
 *.db
 *.sqlite3
 
-# Файлы IDE
+# Build
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 
+<<<<<<< HEAD
 # Файлы векторной базы данных
 data/chroma/
 
 # Временные файлы
 *.tmp
+=======
+# Project specific
+*.db
+.env
+>>>>>>> 4acce5b08b8e9f6c735ba781888afd88a581912e
 .DS_Store
